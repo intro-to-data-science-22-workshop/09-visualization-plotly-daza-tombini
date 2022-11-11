@@ -1,0 +1,209 @@
+---
+title: "Creating interactive graphs with Plotly"
+author: "Sofia T. and Daniel D."
+date: "`r format(Sys.time(), '%B %d, %Y | %H:%M:%S | %Z')`"
+output:
+  html_document:
+    code_folding: hide
+    df_print: paged
+    highlight: pygments
+    number_sections: no
+    theme: united
+    toc: yes
+    toc_float:
+      collapsed: True
+      smooth_scroll: True
+    toc_depth: 2
+    keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      eval = TRUE,
+                      error = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      comment = NA,
+                      fig.align = "center")
+
+```
+
+# 1. Getting started
+
+Today we will learn about Plotly, an R package that allows you to build interactive graphs. We will be working with the Pokemon dataset that contains the information of all 801 pokemons in the world. Gotta analyze’em all!
+
+```{r,}
+
+#Please install the Rokemon package
+
+#Make sure you have the "devtools" package, if not, install it first.
+
+###install.packages("devtools")
+###library(devtools)
+
+devtools::install_github("schochastics/Rokemon")
+
+#Load the packages
+
+library(Rokemon)
+library(plotly)
+library(tidyverse)
+library(dplyr)
+library(readxl)
+
+#Dataset
+
+pokemon
+
+####Gotta analyze’em all!
+
+```
+
+# 2. Plotly vs Ggplot
+
+I. Ggplot provides meaningful, appealing, but static graphs. This limits the users' possibilities to analyse the data.
+
+II. Plotly allows users to interact on a wide variety of forms: zoom the plot, hover over a point, filter categories, among others.
+
+III. Interactive graphs are useful for having a deeper understanding of the patterns of data.
+
+# 3. Examples
+
+
+
+## 3A. Using ggplot
+
+Let's take a closer look
+
+```{r,}
+
+
+pok3a <- ggplot(pokemon, aes(x=attack, y=speed)) +
+  geom_point(shape=1, alpha=0.5) +   
+  ggtitle("Fig. 1: Attack vs Speed ", subtitle = "Built with Ggplot") +
+  labs(y="Attack", 
+       x = "Speed", 
+  caption = "Source: Pokemon")+
+  theme_minimal()
+
+pok3a
+
+
+```
+
+This graphic looks cool! We can clearly see a positive correlation between attack and speed. But what would happen if we add the pokemons' name to the graph? Imagine that we would like to know to which pokemon belongs each dot. It would look like this:
+
+## 3B. Adding names
+
+```{r}
+
+pok3b <- ggplot(pokemon, aes(x=attack, y=speed, label= name)) +
+  geom_point(shape=1, alpha=0.5) +
+  geom_text(size=3, hjust=1, vjust=1) +
+  ggtitle("Fig. 1: Attack vs Speed ", subtitle = "Built with Ggplot") +
+  labs(y="Attack", 
+       x = "Speed", 
+  caption = "Source: Pokemon")+
+  theme_minimal()
+
+pok3b
+
+```
+
+Graphic 1B is not clear, you can not identify the pokemons. So... here comes plotly.
+
+## 3C. Using with plotly
+
+
+```{r}
+
+pok3c <- pokemon%>%
+  plot_ly(x = ~attack, y = ~speed, type = 'scatter', mode = 'markers',text=~name,
+          marker=list(color="blue", size=10))%>%
+  layout(title= "Fig. 1: Attack vs Speed",
+         xaxis = list(title = list(text = 'Speed')),
+         yaxis = list(title = list(text = 'Attack')))
+
+pok3c
+
+```
+
+Much better right? Let's keep pushing!
+
+## 3D. Adding more elements
+
+```{r}
+
+pok3d <- pokemon%>%
+  plot_ly(x = ~attack, y = ~speed, color =~generation,
+          type = 'scatter', mode = 'markers', text=~name,
+          marker=list(color=~generation, size=10))%>%
+  layout(title= "Fig. 1: Attack vs Speed",
+         xaxis = list(title = list(text = 'Speed')),
+         yaxis = list(title = list(text = 'Attack')))
+
+pok3d
+
+```
+
+This graph allows us to map the pokemons by generation.
+
+# 4. Other type of cool graphs
+
+Besides scatterplots, you can also create other type of graphics in Plotly such as bubble charts, histograms, box plots, among others. Let's see some cool examples! 
+Remember, you can be anything you want to be.
+
+## 4A. Bubble charts
+
+```{r}
+
+##In this example we want to see if there is any correlation between capture rate and attack using a bubble chart.
+
+pokemon_count <- pokemon %>%
+  count(type1)
+
+pokemon_sub <- pokemon %>%
+  group_by(type1) %>%
+  summarise(ave_capture = mean(capture_rate, na.rm=T), 
+            ave_attack = mean(attack, na.rm = T))
+  
+pokemon_sub <- merge(pokemon_sub, pokemon_count, by="type1")
+
+pok4a <- plot_ly(pokemon_sub, x = ~ave_attack, y = ~ave_capture, 
+                 text = ~type1, type = 'scatter', mode = 'markers',
+                 size = ~n, color = ~type1, colors = 'Paired',
+                 marker = list(opacity = 0.5, sizemode = 'diameter'))
+
+pok4a <- pok4a %>% layout(title = 'Capture rate vs Attack',
+         xaxis = list(title = list(text = 'Attack')),
+         yaxis = list(title = list(text = 'Avergage Capture Rate')))
+
+pok4a
+
+```
+
+## 4B. Histograms
+
+```{r}
+
+
+
+
+```
+
+
+
+# 5. Build your first Plotly graph
+
+```{r}
+
+
+```
+
+# 6. Extra materials
+
+
+# 7. Conclusion
+
+
+# References
