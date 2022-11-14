@@ -104,7 +104,7 @@ pok3b <- ggplot(pokemon, aes(x=attack, y=speed, label= name)) +
 pok3b
 ```
 
-Graphic 1B is not clear, you can not identify the Pokémon. So... here comes plotly.
+Graphic 3B is not clear, you can not identify the Pokémon. So... here comes plotly.
 
 ## 3C. Using Plotly
 
@@ -386,7 +386,7 @@ hw_plot
 
 ## 8B.
 
-2nd. We wanted to see if there was a correlation between weight and attack in ground and water type pokémons, sadly... we couldn't find any :/ The worst part is that bug pokemons made their thing and ruined our code! Now we can't show you that there is no correlation. But here you come, pokémon masteR, please find the BUGS in the following code, fix it and bring back the graph! Do you accept the challenge?
+We wanted to see if there was a correlation between weight and attack in ground and water type pokémons, sadly... we couldn't find any :/ The worst part is that bug pokemons made their thing and ruined our code! Now we can't show you that there is no correlation. But here you come, pokémon masteR, please find the BUGS in the following code, fix it and bring back the graph! Do you accept the challenge?
 
 ```{r, eval = FALSE}
 
