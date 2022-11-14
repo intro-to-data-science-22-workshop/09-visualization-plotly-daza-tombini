@@ -26,9 +26,10 @@ knitr::opts_chunk$set(echo = TRUE,
                       comment = NA,
                       fig.align = "center")
 
+
 ```
 
-# 1. Getting started
+# 1. Getting started `r emo::ji("smile")`
 
 Today we will learn about `plotly`, an R package that allows you to build interactive graphs. To shake things up a bit, we'll be working with a dataset that contains the information of all **801 Pokémon** in the world! 
 
@@ -60,7 +61,7 @@ pokemon <- pokemon
 ####Gotta analyze’em all!
 ```
 
-# 2. Plotly vs Ggplot
+# 2. Plotly vs Ggplot `r emo::ji("fire")`
 
 - Ggplot provides meaningful, appealing, but _static_ graphs. This limits the users' possibilities to analyse the data.
 
@@ -68,11 +69,11 @@ pokemon <- pokemon
 
 - Interactive graphs are useful for having a deeper understanding of the patterns of data.
 
-# 3. Examples
+# 3. Examples `r emo::ji("graph")`
 
-## 3A. Using ggplot
+## 3A. Using ggplot 
 
-Let's take a closer look.
+Let's take a closer look of our dataset.
 
 ```{r,}
 pok3a <- ggplot(pokemon, aes(x=attack, y=speed)) +
@@ -86,8 +87,7 @@ pok3a <- ggplot(pokemon, aes(x=attack, y=speed)) +
 pok3a
 ```
 
-This graphic looks cool! We can clearly see a positive correlation between attack and speed. But what would happen if we add the Pokémons' name to the graph? Imagine that we would like to know to which Pokémon belongs each dot in order to build the fastest and strongest Pokémon
-team. It would look like this:
+This graphic looks cool! We can clearly see a positive correlation between attack and speed. But what would happen if we add the Pokémons' name to the graph? Imagine that we would like to know to which Pokémon belongs each dot in order to build the fastest and strongest Pokémon team. It would look like this:
 
 ## 3B. Adding names in Ggplot
 
@@ -149,7 +149,7 @@ This graph allows us to map the Pokémon by the game they first appeared in (`ge
 
 Plotly lets you filter observations by clicking on the legend. **Try singling out only Pokemon from the first generation by double-clicking on "1" on the right-hand side.** 
 
-# 4. Other type of cool plots
+# 4. Other type of cool plots `r emo::ji("good")`
 
 Besides scatterplots, you can also create other type of graphics in Plotly such as bubble charts, histograms, box plots, among others. Let's see some cool examples! 
 
@@ -225,7 +225,7 @@ pok4c
 ```
 This boxplot showcases on average how  strong (`base_total`) the Pokémon in each generation of games are. Hovering over each bin with your mouse will reveal summary statistics of each group.
 
-# 5. Building your first Plotly graph
+# 5. Building your first Plotly graph `r emo::ji("bright")`
 
 ## 5A. Let's get started!
 
@@ -318,7 +318,7 @@ layout(title = "Hit points by Defense points by Height (in meters)",
 
 pok5c
 ```
-# 6. Some extras
+# 6. Some extras `r emo::ji("cap")`
 
 ## 6A. Exporting plotly graphs as static images
 
@@ -352,7 +352,7 @@ pok3a %>%
 ```
 To change the looks of this graph, you would have to do some modifications on the ggplot side of things, although some alterations are possible with `style()`. It may be better to build the graph natively in `plotly()` depending on your requirements.
 
-# 7. Conclusion
+# 7. Conclusion `r emo::ji("pencil")`
 
 The `plotly` package is a powerful data visualization tool which can bring your plots and graphs to life by making them more dynamic and interactive. Like ggplot, it supports a wide variety of plots, from scatter to histograms to even heatmaps. `plotly` is best used in an digital setting, such as in your browser, in order take full advantage of its functionality.
 
@@ -360,9 +360,10 @@ Plotting is made possible with the `plot_ly()` function. The simple function `pl
 
 With these tips, your plots will be the very best, like no plot ever was!
 
-# 8. Final challenge
+# 8. Final challenges `r emo::ji("ok")`
 
-Here's an exercise to challenge your plotly skills. Using the `pokemon` dataset from the package `Rokemon`, can you plot out the relationship of height and weight for all Fire-type Pokemon? Assign legend colors according to generation, and make sure the hover text includes the pokemon's name and their classification.
+## 8A.
+Here are two exercises to challenge your plotly skills. Using the `pokemon` dataset from the package `Rokemon`, can you plot out the relationship of height and weight for all Fire-type Pokemon? Assign legend colors according to generation, and make sure the hover text includes the pokemon's name and their classification.
 
 Possible solution below - no cheating! ;)
 
@@ -380,9 +381,30 @@ layout(title = "Relationship between height and weight of Fire-types",
   yaxis = list(title = list(text = 'Weight (kilograms)')))
 
 hw_plot
+
 ```
 
-# 8. References and Sources
+## 8B.
+
+2nd. We wanted to see if there was a correlation between weight and attack in ground and water type pokémons, sadly... we couldn't find any :/ The worst part is that bug pokemons made their thing and ruined our code! Now we can't show you that there is no correlation. But here you come, pokémon masteR, please find the BUGS in the following code, fix it and bring back the graph! Do you accept the challenge?
+
+```{r, eval = FALSE}
+
+challenge2 <- rokemon %>%
+  filter(type = c("ground","water")) %>%
+  plot_ly(x = ~attack, y = ~weigth_kg, splt = ~type, 
+        type == 'scatter') %>% 
+  layout(title = 'Weight  vs. Attack', 
+         xaxs = list(title = 'Attack'),
+         yaxis = list(title = 'Weight (kilograms)'),          
+         legend = list(title = list(text = 'Type')),
+         plot_bgcolor = 'white')
+
+challenge2
+
+```
+
+# 9. References and Sources
 
 * [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com)
 * ['plotly' package documentation](https://cran.r-project.org/web/packages/plotly/plotly.pdf)

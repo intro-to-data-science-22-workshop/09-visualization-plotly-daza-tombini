@@ -50,6 +50,7 @@ pokemon <- pokemon
 ####Gotta analyze’em all!
 ```
 
+---
 # 2. Plotly vs Ggplot
 
 - Ggplot provides meaningful, appealing, but _static_ graphs. This limits the users' possibilities to analyse the data.
@@ -75,13 +76,16 @@ pok3a <- ggplot(pokemon, aes(x=attack, y=speed)) +
   caption = "Source: Pokemon")+
   theme_minimal()
 
+
 pok3a
+
 ```
 
 This graphic looks cool! We can clearly see a positive correlation between attack and speed. But what would happen if we add the Pokémons' name to the graph? Imagine that we would like to know to which Pokémon belongs each dot in order to build the fastest and strongest Pokémon
 team. It would look like this:
 
 ---
+# 3. Examples
 
 ## 3B. Adding names in Ggplot
 
@@ -101,6 +105,7 @@ pok3b
 Graphic 1B is not clear, you can not identify the Pokémon. So... here comes plotly.
 
 ---
+# 3. Examples
 
 ## 3C. Using Plotly
 
@@ -121,6 +126,7 @@ each Pokémon's name without clutter.
 Much better right? Let's keep pushing!
 
 ---
+# 3. Examples
 
 ## 3D. Adding more elements to plotly
 
@@ -156,6 +162,8 @@ Besides scatterplots, you can also create other type of graphics in Plotly such 
 Remember, you can be anything you want to be.
 
 ---
+
+# 4. Other type of cool plots
 
 ## 4A. Bubble charts
 
@@ -194,6 +202,7 @@ In this bubble chart, you can hover over the circles to see what Pokémon type i
 _(For Pokémon nerds out there, this plot only takes into account primary typing! So sorry, Flying types.)_
 
 ---
+# 4. Other type of cool plots
 
 ## 4B. Histograms
 
@@ -217,6 +226,7 @@ pok4b
 Wow! Pokemons' defense and attack points also follow a normal distribution!
 
 ---
+# 4. Other type of cool plots
 
 ## 4C. Box plots
 
@@ -271,6 +281,7 @@ Visually, there does seem to be a positive correlation with these two statistics
 While it's a nice scatterplot, this hardly takes advantage of plotly's interactive capabilities. Let's make our plot better by introducing detail and plotly's signature feature, **hover text**.
 
 ---
+# 5. Building your first Plotly graph
 
 ## 5B. Leveling up your plots
 
@@ -305,6 +316,7 @@ I used the following functions to add more detail:
 - `layout()` enables me to adjust the axis labels, but also supports many other arguments that modify your plot's final appearance. See [here](https://plotly.com/r/reference/#Layout_and_layout_style_objects) for a full list. 
 
 ---
+# 5. Building your first Plotly graph
 
 ## 5C. What? Your scatterplot is evolving!
 
@@ -354,6 +366,7 @@ orca(pok5b, "pok5b.png")
 ```
 
 ---
+# 6. Some extras
 
 ## 6B. Transforming ggplot graphs into plotly
 
@@ -388,9 +401,11 @@ With these tips, your plots will be the very best, like no plot ever was!
 
 ---
 
-# 8. Final challenge
+# 8. Final challenges
 
-Here's an exercise to challenge your plotly skills. Using the `pokemon` dataset from the package `Rokemon`, can you plot out the relationship of height and weight for all Fire-type Pokemon? Assign legend colors according to generation, and make sure the hover text includes the pokemon's name and their classification.
+Here are two exercises to challenge your plotly skills. 
+
+1st. Using the `pokemon` dataset from the package `Rokemon`, can you plot out the relationship of height and weight for all Fire-type Pokemon? Assign legend colors according to generation, and make sure the hover text includes the pokemon's name and their classification.
 
 Possible solution below - no cheating! ;)
 
@@ -408,7 +423,29 @@ layout(title = "Relationship between height and weight of Fire-types",
   yaxis = list(title = list(text = 'Weight (kilograms)')))
 
 hw_plot
+
 ```
+
+# 8. Final challenges
+
+2nd. We wanted to see if there was a correlation between weight and attack in ground and water type pokémons, sadly... we couldn't find any :/ The worst part is that bug pokemons made their thing and ruined our code! Now we can't show you that there is no correlation. But here you come, pokémon masteR, please find the BUGS in the following code, fix it and bring back the graph! Do you accept the challenge?
+
+```{r, eval = FALSE}
+
+challenge2 <- rokemon %>%
+  filter(type = c("ground","water")) %>%
+  plot_ly(x = ~attack, y = ~weigth_kg, splt = ~type, 
+        type == 'scatter') %>% 
+  layout(title = 'Weight  vs. Attack', 
+         xaxs = list(title = 'Attack'),
+         yaxis = list(title = 'Weight (kilograms)'),          
+         legend = list(title = list(text = 'Type')),
+         plot_bgcolor = 'white')
+
+challenge2
+
+```
+
 
 ---
 
