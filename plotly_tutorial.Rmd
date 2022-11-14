@@ -363,7 +363,7 @@ With these tips, your plots will be the very best, like no plot ever was!
 # 8. Final challenges `r emo::ji("ok")`
 
 ## 8A.
-Here are two exercises to challenge your plotly skills. Using the `pokemon` dataset from the package `Rokemon`, can you plot out the relationship of height and weight for all Fire-type Pokemon? Assign legend colors according to generation, and make sure the hover text includes the pokemon's name and their classification.
+Here are three exercises to challenge your plotly skills. Using the `pokemon` dataset from the package `Rokemon`, can you plot out the relationship of height and weight for all Fire-type Pokemon? Assign legend colors according to generation, and make sure the hover text includes the pokemon's name and their classification.
 
 Possible solution below - no cheating! ;)
 
@@ -403,6 +403,25 @@ challenge2 <- rokemon %>%
 challenge2
 
 ```
+
+## 8C.
+
+Empirically speaking, we think that the number of water type pokémons has decreased among generations. Can you plot a graphic to check if there is such pattern? Create a bar plot filtering pokémons by type, include water type -of course- and three more. Add colors according to the type. Share your results!
+
+```{r, eval = FALSE}
+
+
+challenge3 <- pokemon %>%
+  filter(type1 == c("fire", "ground", "water", "grass")) %>%
+  count(generation, type1) %>% 
+  plot_ly(x = ~generation, y = ~n, type = 'bar', color = ~type1)
+
+challenge3
+
+
+```
+
+
 
 # 9. References and Sources
 
