@@ -426,6 +426,7 @@ hw_plot
 
 ```
 
+---
 # 8. Final challenges
 
 2nd. We wanted to see if there was a correlation between weight and attack in ground and water type pokémons, sadly... we couldn't find any :/ The worst part is that bug pokemons made their thing and ruined our code! Now we can't show you that there is no correlation. But here you come, pokémon masteR, please find the BUGS in the following code, fix it and bring back the graph! Do you accept the challenge?
