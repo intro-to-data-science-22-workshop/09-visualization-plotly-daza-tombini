@@ -16,8 +16,8 @@ The goals of this session are to (1) compare plotly's functionalities to popular
 
 ## Instructors
 
-- Daniel Daza ([website](http://simonmunzert.github.io/), [twitter](https://twitter.com/danieldazavz))
-- Sofia Tombini ([website](https://en.wikipedia.org/wiki/Kermit_the_Frog), [twitter](https://twitter.com/KermitTheFrog))
+- Daniel Daza ([website](https://github.com/danieldazavz/), [twitter](https://twitter.com/danieldazavz))
+- Sofia Tombini ([website](https://github.com/tofiasodd/), [twitter](https://twitter.com/KermitTheFrog))
 
 
 ## Further resources
