@@ -1,4 +1,4 @@
-# Working with dplyr
+# Data visualization & interactive graphs with plotly
 
 
 ## Summary
@@ -7,25 +7,25 @@ This repository provides materials for a session that is part of the [I2DS Tools
 
 ### Session contents
 
-This session will introduce you to the modern data wrangling workflow with R and dplyr. Data wrangling is one of the core steps in the data science workflow. dplyr is a grammar of data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges, including the manipulation of datasets and variables. 
+This session will introduce you to the functionalities of graphing package plotly. Plotly enables users to create interactive and dynamic plots that permit a new level of interaction with data, such as additional info when hovering over observations, or embedded filtering functionalities. This package can also render 3D plots that allows viewers to rotate the graphs and view from different angles. It bears similarities to ggplot. 
 
 ### Main learning objectives
 
-The goals of this session are to (1) equip you with conceptual knowledge about the dplyr package and data wrangling workflow, (2) show you the three key verbs of the pacakge, and (3) provide you with practice material as well as some further readings.
+The goals of this session are to (1) compare plotly's functionalities to popular plotting package ggplot and highlight usage cases, (2) show you the basic functionalities of plotly, and (3) provide you with practice material as well as other sources.
 
 
 ## Instructors
 
-- Simon Munzert ([website](http://simonmunzert.github.io/), [twitter](https://twitter.com/simonsaysnothin))
-- Kermit the Frog ([website](https://en.wikipedia.org/wiki/Kermit_the_Frog), [twitter](https://twitter.com/KermitTheFrog))
+- Daniel Daza ([website](http://simonmunzert.github.io/), [twitter](https://twitter.com/simonsaysnothin))
+- Sofia Tombini ([website](https://en.wikipedia.org/wiki/Kermit_the_Frog), [twitter](https://twitter.com/KermitTheFrog))
 
 
 ## Further resources
 
-- [dplyr overview at dplyr.tidyverse.org](https://dplyr.tidyverse.org/)
-- [Hands-on dplyr tutorial by Data School on YouTube](https://www.youtube.com/watch?v=jWjqLW-u3hc)
-- [R for Data Science book - part on data wrangling](https://r4ds.had.co.nz/wrangle-intro.html)
-
+* [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com)
+* ['plotly' package documentation](https://cran.r-project.org/web/packages/plotly/plotly.pdf)
+* ['plotly' package on GitHub](https://github.com/plotly)
+* [A Comparison of plot_ly and ggplotly for Interactive Graphs in R](https://jtr13.github.io/spring19/community_contribution_group17.html)
 
 ## License
 
