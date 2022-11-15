@@ -26,7 +26,6 @@ knitr::opts_chunk$set(echo = TRUE,
                       comment = NA,
                       fig.align = "center")
 
-
 ```
 
 # 1. Getting started `r emo::ji("smile")`
@@ -362,15 +361,17 @@ With these tips, your plots will be the very best, like no plot ever was!
 
 # 8. Final challenges `r emo::ji("ok")`
 
+Here are three exercises to challenge your plotly skills. Do you have what it takes?
+
 ## 8A.
-Here are three exercises to challenge your plotly skills. Using the `pokemon` dataset from the package `Rokemon`, can you plot out the relationship of height and weight for all Fire-type Pokemon? Assign legend colors according to generation, and make sure the hover text includes the pokemon's name and their classification.
+Using the `pokemon` dataset from the package `Rokemon`, can you plot out the relationship of height and weight for all Fire-type Pokemon? Assign legend colors according to generation, and make sure the hover text includes the pokemon's name and their classification.
 
 Possible solution below - no cheating! ;)
 
 ```{r, eval = FALSE}
 pokemon_hw <- filter(pokemon, type1 == "fire")
 
-hw_plot <- plot_ly(pokemon_hw, x = ~height_m, y = ~weight_kg,
+challenge1 <- plot_ly(pokemon_hw, x = ~height_m, y = ~weight_kg,
                type = 'scatter',
                color = ~generation, 
                opacity = 0.5,
@@ -380,17 +381,15 @@ layout(title = "Relationship between height and weight of Fire-types",
   xaxis = list(title = list(text = 'Height (meters)')),
   yaxis = list(title = list(text = 'Weight (kilograms)')))
 
-hw_plot
-
+challenge1
 ```
 
 ## 8B.
 
-We wanted to see if there was a correlation between weight and attack in ground and water type pokémons, sadly... we couldn't find any :/ The worst part is that bug pokemons made their thing and ruined our code! Now we can't show you that there is no correlation. But here you come, pokémon masteR, please find the BUGS in the following code, fix it and bring back the graph! Do you accept the challenge?
+We wanted to see if there was a correlation between weight and attack in Ground- and Water-type Pokémon... sadly, we couldn't find any :/ The worst part is that the Bug-type Pokémon did their thing and ruined our code! Now we can't show you that there is no correlation. But here you come, pokémon masteR, please find the BUGS in the following code, fix it and bring back the graph! Do you accept the challenge?
 
 ```{r, eval = FALSE}
-
-challenge2 <- rokemon %>%
+challenge2 <- pokemon %>%
   filter(type = c("ground","water")) %>%
   plot_ly(x = ~attack, y = ~weigth_kg, splt = ~type, 
         type == 'scatter') %>% 
@@ -401,29 +400,24 @@ challenge2 <- rokemon %>%
          plot_bgcolor = 'white')
 
 challenge2
-
 ```
 
 ## 8C.
 
-Empirically speaking, we think that the number of water type pokémons has decreased among generations. Can you plot a graphic to check if there is such pattern? Create a bar plot filtering pokémons by type, include water type -of course- and three more. Add colors according to the type. Share your results!
+Empirically speaking, we think that the number of Water-type Pokémon has decreased across generations. Can you plot a graphic to check if there is such pattern? Create a bar plot filtering Pokémon by type, include Water-types -- of course -- and three more types of your choosing. Add colors according to the type. Share your results!
 
 ```{r, eval = FALSE}
-
-
 challenge3 <- pokemon %>%
   filter(type1 == c("fire", "ground", "water", "grass")) %>%
   count(generation, type1) %>% 
   plot_ly(x = ~generation, y = ~n, type = 'bar', color = ~type1)
 
 challenge3
-
-
 ```
 
 
 
-# 9. References and Sources
+# 9. References and Sources `r emo::ji("books")`
 
 * [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com)
 * ['plotly' package documentation](https://cran.r-project.org/web/packages/plotly/plotly.pdf)
