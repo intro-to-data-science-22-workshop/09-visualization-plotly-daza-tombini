@@ -1,7 +1,7 @@
 ---
 title: "Creating interactive graphs with Plotly"
 author: "Sofia T. and Daniel D."
-institute: "Hertie School of Governance"
+institute: "Hertie School of Governance - IDS Workshop 2022"
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts]
@@ -18,37 +18,35 @@ knitr::opts_chunk$set(echo = TRUE,
 
 # 1. Getting started
 
-Today we will learn about `plotly`, an R package that allows you to build interactive graphs. To shake things up a bit, we'll be working with a dataset that contains the information of all **801 Pokémon** in the world! 
+Today we will learn about `plotly`, an R package that allows you to **build interactive graphs**. 
 
-This dataset, from package `Rokemon`, is based on the hit video game franchise. Every Pokémon species has its own characteristics when it comes to height, weight, attack power, defense power, speed, hit points (stamina), among others. **Gotta analyze’em all!**
+To illustrate, we'll be working with a dataset that contains the information of all **801 Pokémon** in the world! Every Pokémon species has its own characteristics when it comes to height, weight, attack power, defense power, hit points (stamina)... **Gotta analyze’em all!**
+
+<div align="center">
+<br>
+<img src="pics/pokemon-stats.webp" width=500>
+</div>
 
 ---
 
 ```{r, echo = TRUE}
-
-#Please install the Rokemon package
-
-#Make sure you have the "devtools" package, if not, install it first.
+# Please install the Rokemon package
+# Make sure you have the "devtools" package, if not, install it first.
 
 ###install.packages("devtools")
 ###library(devtools)
 
 devtools::install_github("schochastics/Rokemon")
 
-#Load the packages
+# Load the packages
+library(Rokemon) # contains data set
+library(plotly) # focus of our tutorial
+library(tidyverse) # to filter data set
+library(dplyr) # additional functions
+library(ggplot2) # for comparison 
 
-library(Rokemon)
-library(plotly)
-library(tidyverse)
-library(dplyr)
-library(ggplot2)
-library(readxl)
-
-#Dataset
-
-pokemon <- pokemon
-
-####Gotta analyze’em all!
+# Data set
+pokemon <- pokemon # Gotta analyze’em all!
 ```
 
 ---
@@ -60,13 +58,19 @@ pokemon <- pokemon
 
 - Interactive graphs are useful for having a deeper understanding of the patterns of data.
 
+<div align="center">
+<img src="pics/expanding-brain.jpg" width=500>
+<br>
+<i>accurate image of your brain on plotly</i>
+</div>
+
 ---
 
 # 3. Examples
 
 ## 3A. Using ggplot
 
-Let's take a closer look.
+Let's take a closer look at the differences by mapping out the relationship between Pokémon's **attack and speed stats** with `ggplot`. 
 
 <details>
   <summary>
@@ -85,28 +89,25 @@ pok3a <- ggplot(pokemon, aes(x=attack, y=speed, )) +
 ]]
 </details>
 
-
 <details>
   <summary>
   Plot
   </summary>
 .details[.code120[
 ```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
-
 pok3a
-
 ```
 ]]
 </details>
 
-This graphic looks cool! We can clearly see a positive correlation between attack and speed. But what would happen if we add the Pokémons' name to the graph? Imagine that we would like to know to which Pokémon belongs each dot in order to build the fastest and strongest Pokémon team. It would look like this:
+If we wanted to now add each Pokémon's **name** to the plot, it would look like this...
 
 ---
 # 3. Examples
 
-## 3B. Adding names in Ggplot
+## 3B. Adding names in ggplot
 
-Graphic 3B is not clear, you can not identify the Pokémon. So... here comes plotly.
+The results are hard to read.
 
 <details>
   <summary>
@@ -141,10 +142,9 @@ pok3b
 ---
 # 3. Examples
 
-## 3C. Using Plotly
-Plotly allows the user to **hover over the individual observations**
-and see hover text corresponding to the point on the plot. Now, you can see
-each Pokémon's name without clutter. 
+## 3C. Using plotly
+`plotly` allows the user to **hover over the individual observations**
+and see hover text corresponding to the point on the plot.
 
 <details>
   <summary>
@@ -175,14 +175,14 @@ pok3c
 ]]
 </details>
 
-Much better, right? Let's keep pushing!
+Now, you can see each Pokémon's name without clutter. 
 
 ---
 # 3. Examples
 
 ## 3D. Adding more elements to plotly
 
-This graph allows us to map the Pokémon by the game they first appeared in (`generation`).
+This graph allows us to map the Pokémon by the game they first appeared in (otherwise known as the variable `generation`).
 
 <details>
   <summary>
@@ -221,7 +221,7 @@ pok3d
 </details>
 
 
-Plotly lets you filter observations by clicking on the legend. **Try singling out only Pokemon from the first generation by double-clicking on "1" on the right-hand side.** 
+`plotly` lets you filter observations by clicking on the legend.
 
 ---
 
@@ -237,7 +237,7 @@ Remember, you can be anything you want to be.
 
 ## 4A. Bubble charts
 
-In this example we want to see if there is any correlation between capture rate and total stats average of Pokémon types using a bubble chart.
+Is there any correlation between capture rate and total stats average of Pokémon types?
 
 <details>
   <summary>
@@ -284,16 +284,13 @@ pok4a
 ]]
 </details>
 
-
 In this bubble chart, you can hover over the circles to see what Pokémon type it corresponds to and how many Pokémon belong to that type.
-
-_(For Pokémon nerds out there, this plot only takes into account primary typing! So sorry, Flying types.)_
 
 ---
 # 4. Other type of cool plots
 
 ## 4B. Histograms
-Let's see how is the distribution of pokémons' defense and attack.
+Let's see how is the distribution of Pokémons' defense and attack stats.
 
 <details>
   <summary>
@@ -329,7 +326,6 @@ pok4b
 ]]
 </details>
 
-
 Wow! Pokemons' defense and attack points also follow a normal distribution!
 
 ---
@@ -337,7 +333,7 @@ Wow! Pokemons' defense and attack points also follow a normal distribution!
 
 ## 4C. Box plots
 
-This boxplot showcases on average how  strong (`base_total`) the Pokémon in each generation of games are. Hovering over each bin with your mouse will reveal summary statistics of each group.
+This boxplot showcases on average how strong (variable `base_total`) the Pokémon in each generation of games are.
 
 <details>
   <summary>
@@ -354,7 +350,6 @@ pok4c <- plot_ly(data = pokemon,
 ]]
 </details>
 
-
 <details>
   <summary>
   Plot
@@ -366,14 +361,15 @@ pok4c
 ]]
 </details>
 
+Hover text reveals summary statistics for each group.
+
 ---
 
 # 5. Building your first Plotly graph
 
 ## 5A. Let's get started!
 
-This tutorial level will walk you through on how to ~~catch your first Pokémon~~
-build your first plotly plot. There are two ways to do this:
+There are two ways to do this:
 
 - with the `plot_ly()` function
 - with the `ggplot_ly()` function, which translates a ggplot into plotly
@@ -382,19 +378,14 @@ We're going to have a more in-depth look at the first option.
 
 ---
 # 5. Building your first Plotly graph
-## 5A.
+## 5A. Let's get started!
 
-__Let's say that I want to have a look at the Pokémon from the first Pokémon game, released
-in 1996. My theory is that a Pokémon's hit points total is positively correlated with its defense stat, as a more protected, defensive Pokémon will last longer in battle.__
+_Let's say that I want to have a look at the Pokémon from the first Pokémon game, released
+in 1996. My theory is that a Pokémon's hit points total is positively correlated with its defense stat, as a more protected, defensive Pokémon will last longer in battle._
 
-I can map this out easily with plotly via a scatterplot. To choose what plot I want, I use the `type` argument within `plot_ly()`. For a full list of attributes and arguments that can be passed along in plotly, see `schema()`.
-
-Notice that I call the variables with a `~`. This is important to plotly's syntax.
-
----
-
-# 5. Building your first Plotly graph
-## 5A.
+- Choose the `type` argument within `plot_ly()` to determine what kind of plot you want
+- Call variables with `~`
+- For a full list of attributes and arguments that can be passed along in plotly, `schema()`
 
 <details>
   <summary>
@@ -411,7 +402,10 @@ pok5a <- plot_ly(pokemon_gen13, x = ~defense, y = ~hp, type = 'scatter')
 ]]
 </details>
 
-
+---
+# 5. Building your first Plotly graph
+## 5A. Let's get started!
+Visually, there does seem to be a positive correlation with these two statistics.
 <details>
   <summary>
   Plot
@@ -423,9 +417,7 @@ pok5a
 ]]
 </details>
 
-Visually, there does seem to be a positive correlation with these two statistics.
-
-While it's a nice scatterplot, this hardly takes advantage of plotly's interactive capabilities. Let's make our plot better by introducing detail and plotly's signature feature, **hover text**.
+Let's make our plot better by introducing detail and plotly's signature feature, **hover text**.
 
 ---
 # 5. Building your first Plotly graph
@@ -473,12 +465,10 @@ pok5b
 ]]
 </details>
 
-I used the following functions to add more detail:
-
-- `color()` allows you to create a legend for your plot. Here, I separated the observations based on if the Pokémon is legenday (read: one of a kind) or not.
+- `color()` allows you to create a legend for your plot.
 - `colors()` assigns colors to your legend. Supports hexcodes, RBG values...
 - `opacity()` modifies observation markers, useful if you have many overlapping ones.
-- `hovertext()` is the big deal here. This option is very flexible, so please see plotly's documentation for the full scope of what it's capable of. Here, I made it to display basic information about each critter.
+- `hovertext()` is the big deal here. This option is very flexible, so please see plotly's documentation for the full scope of what it's capable of.
 - `layout()` enables me to adjust the axis labels, but also supports many other arguments that modify your plot's final appearance. See [here](https://plotly.com/r/reference/#Layout_and_layout_style_objects) for a full list. 
 
 ---
@@ -486,9 +476,7 @@ I used the following functions to add more detail:
 
 ## 5C. What? Your scatterplot is evolving!
 
-But plotly doesn't stop there. As previously shown, the package is capable of rendering many different plots -- even 3D ones, taking full advantage of the digital space these plots are intended to be displayed in.
-
-I'll show you this by adding a **z-axis** on my previous plot. While I can define the trace type manually, plotly will also automatically assume a 3D scatterplot from my parameters.
+3D plots by adding a **z-axis**!
 
 <details>
   <summary>
@@ -537,12 +525,8 @@ pok5c
 
 ## 6A. Exporting plotly graphs as static images
 
-While plotly is best used on a digital platform due to its interactive features, there may
-be a time where you want to use your beautiful, carefully drawn plot in a non-dynamic medium -- like, say a paper or a print out.
-
 The `orca()` function allows you to do this, although it requires you to [download Orca](https://github.com/plotly/orca), an open source command line tool that interacts with plotly. You can transform your graphs into .jpegs, .pngs, .pdfs...
 
-The installation process is a bit more complicated than your usual R package ([see here for full instructions](https://github.com/plotly/orca#installation)), so we won't be showing orca() in action. However, this is what code to render your plot into an image would look like:
 
 ```{r, eval = FALSE, echo = TRUE}
 library(orca)
@@ -555,8 +539,6 @@ orca(pok5b, "pok5b.png")
 ## 6B. Transforming ggplot graphs into plotly
 
 Yes, it's possible! The function `ggplotly()` allows you to do this.
-
-Remember this graph from before?
 
 <details>
   <summary>
@@ -575,14 +557,11 @@ pok3a
 
 ## 6B. Transforming ggplot graphs into plotly
 
-Applying our make-over with `ggplot_ly()`:
-
 ```{r}
 pok3ly <- pok3a %>% 
   style(hovertext = ~name) %>% 
   ggplotly()
 ```
-
 
 <details>
   <summary>
@@ -595,17 +574,35 @@ pok3ly
 ]]
 </details>
 
-To change the looks of this graph, you would have to do some modifications on the ggplot side of things, although some alterations are possible with `style()`. It may be better to build the graph natively in `plotly()` depending on your requirements.
+Some alterations are possible with `style()`. It may be better to build the graph natively in `plotly()` depending on your requirements.
 
 ---
 
 # 7. Conclusion
 
-The `plotly` package is a powerful data visualization tool which can bring your plots and graphs to life by making them more dynamic and interactive. Like ggplot, it supports a wide variety of plots, from scatter to histograms to even heatmaps. `plotly` is best used in an digital setting, such as in your browser, in order take full advantage of its functionality.
+-> The `plotly` package is a powerful data visualization tool which can bring your plots and graphs to life by making them more dynamic and interactive.
 
-Plotting is made possible with the `plot_ly()` function. The simple function `plot_ly(dataset, x = ~xaxis, y = ~yaxis, type = 'plot')` will get you started with basic functionality. The `hovertext()` function allows you to modify information that is shown when hovering over a point. Many other customizations are possible (type `?plot_ly()` to see more), and the graph visualization can be adjusted via `layout()`.
+--
 
-With these tips, your plots will be the very best, like no plot ever was!
+-> `plotly` is best used in an digital setting, such as in your browser, in order take full advantage of its functionality.
+
+--
+
+-> The simple function `plot_ly(dataset, x = ~xaxis, y = ~yaxis, type = 'plot')` will get you started with basic functionality. 
+
+--
+
+-> The `hovertext()` function allows you to modify information that is shown when hovering over a point. Many other customizations are possible, and the graph visualization can be adjusted via `layout()`.
+
+--
+
+-> Not every plot requires interactivity and bells and whistles. See what's the best fit for the story your data is trying to tell.
+
+---
+class:  center, middle
+
+<b>With these tips, your plots will be the very best, like no plot ever was!</b><br>
+Now, let's train our plotly skills.
 
 ---
 
@@ -617,4 +614,9 @@ With these tips, your plots will be the very best, like no plot ever was!
 * [Introduction to ggplot2](https://ggplot2.tidyverse.org/)
 * [A Comparison of plot_ly and ggplotly for Interactive Graphs in R](https://jtr13.github.io/spring19/community_contribution_group17.html)
 * ['Rokemon' package on GitHub](https://github.com/schochastics/Rokemon)
-* [RMarkdown reference](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
+
+<div align="center">
+<img src="pics/snorlax.png" width=300><br>
+<i>snorlax wishes you good luck on
+all of your plotting adventures.</i>
+</div>
