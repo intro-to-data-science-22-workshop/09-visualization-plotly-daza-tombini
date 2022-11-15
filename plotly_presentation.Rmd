@@ -41,6 +41,7 @@ library(Rokemon)
 library(plotly)
 library(tidyverse)
 library(dplyr)
+library(ggplot2)
 library(readxl)
 
 #Dataset
@@ -67,70 +68,128 @@ pokemon <- pokemon
 
 Let's take a closer look.
 
-```{r, echo = FALSE}
-pok3a <- ggplot(pokemon, aes(x=attack, y=speed)) +
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
+pok3a <- ggplot(pokemon, aes(x=attack, y=speed, )) +
   geom_point(shape=1, alpha=0.5) +   
-  ggtitle("Fig. 1: Attack vs Speed ", subtitle = "Built with Ggplot") +
+  ggtitle("Fig. 3A: Attack vs Speed ", subtitle = "Built with Ggplot") +
   labs(y="Attack", 
        x = "Speed", 
   caption = "Source: Pokemon")+
   theme_minimal()
+```
+]]
+</details>
 
+
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
 
 pok3a
 
 ```
+]]
+</details>
 
-This graphic looks cool! We can clearly see a positive correlation between attack and speed. But what would happen if we add the Pokémons' name to the graph? Imagine that we would like to know to which Pokémon belongs each dot in order to build the fastest and strongest Pokémon
-team. It would look like this:
+This graphic looks cool! We can clearly see a positive correlation between attack and speed. But what would happen if we add the Pokémons' name to the graph? Imagine that we would like to know to which Pokémon belongs each dot in order to build the fastest and strongest Pokémon team. It would look like this:
 
 ---
 # 3. Examples
 
 ## 3B. Adding names in Ggplot
 
-```{r}
+Graphic 3B is not clear, you can not identify the Pokémon. So... here comes plotly.
+
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
 pok3b <- ggplot(pokemon, aes(x=attack, y=speed, label= name)) +
   geom_point(shape=1, alpha=0.5) +
   geom_text(size=3, hjust=1, vjust=1) +
-  ggtitle("Fig. 1B: Attack vs Speed ", subtitle = "Built with Ggplot") +
+  ggtitle("Fig. 3B: Attack vs Speed ", subtitle = "Built with Ggplot") +
   labs(y="Attack", 
        x = "Speed", 
   caption = "Source: Pokemon")+
   theme_minimal()
+```
+]]
+</details>
 
+
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
 pok3b
 ```
-
-Graphic 1B is not clear, you can not identify the Pokémon. So... here comes plotly.
+]]
+</details>
 
 ---
 # 3. Examples
 
 ## 3C. Using Plotly
-
-```{r}
-pok3c <- pokemon%>%
-  plot_ly(x = ~attack, y = ~speed, type = 'scatter', mode = 'markers',text=~name,
-          marker=list(color="blue", size=10))%>%
-  layout(title= "Fig. 1: Attack vs Speed",
-         xaxis = list(title = list(text = 'Speed')),
-         yaxis = list(title = list(text = 'Attack')))
-
-pok3c
-```
 Plotly allows the user to **hover over the individual observations**
 and see hover text corresponding to the point on the plot. Now, you can see
 each Pokémon's name without clutter. 
 
-Much better right? Let's keep pushing!
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
+pok3c <- pokemon%>%
+  plot_ly(x = ~attack, y = ~speed, type = 'scatter', mode = 'markers',text=~name,
+          marker=list(color="blue", size=10))%>%
+  layout(title= "Fig. 3C: Attack vs Speed",
+         xaxis = list(title = list(text = 'Speed')),
+         yaxis = list(title = list(text = 'Attack')))
+
+```
+]]
+</details>
+
+
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
+pok3c
+```
+]]
+</details>
+
+Much better, right? Let's keep pushing!
 
 ---
 # 3. Examples
 
 ## 3D. Adding more elements to plotly
 
-```{r}
+This graph allows us to map the Pokémon by the game they first appeared in (`generation`).
+
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
 pok3d_df <- pokemon
 pok3d_df$generation <- as.character(pok3d_df$generation)
 
@@ -141,15 +200,26 @@ pok3d <- pok3d_df %>%
   plot_ly(x = ~attack, y = ~speed, color =~generation,
           type = 'scatter', mode = 'markers', text= ~name,
           colors = c("#D64E12", "#F9A52C", "#EFDF48", "#8BD346", "#60DBE8", "#16A4D8", "#9B5FE0")) %>%
-  layout(title= "Fig. 1: Attack vs Speed",
+  layout(title= "Fig. 3D: Attack vs Speed",
          xaxis = list(title = list(text = 'Speed')),
          yaxis = list(title = list(text = 'Attack')))
 
-pok3d
-
 ```
+]]
+</details>
 
-This graph allows us to map the Pokémon by the game they first appeared in (`generation`).
+
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
+pok3d
+```
+]]
+</details>
+
 
 Plotly lets you filter observations by clicking on the legend. **Try singling out only Pokemon from the first generation by double-clicking on "1" on the right-hand side.** 
 
@@ -167,10 +237,14 @@ Remember, you can be anything you want to be.
 
 ## 4A. Bubble charts
 
-```{r}
+In this example we want to see if there is any correlation between capture rate and total stats average of Pokémon types using a bubble chart.
 
-##In this example we want to see if there is any correlation between capture rate and total stats average of Pokémon types using a bubble chart.
-
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
 pokemon_count <- pokemon %>%
   count(type1)
 
@@ -194,9 +268,23 @@ pok4a <- pok4a %>% layout(title = 'Capture rate vs Base stats total per Pokémon
          xaxis = list(title = list(text = 'Base stats total')),
          yaxis = list(title = list(text = 'Avergage Capture Rate')),
          showlegend = FALSE)
+```
+]]
+</details>
 
+
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE, prompt=TRUE}
 pok4a
 ```
+]]
+</details>
+
+
 In this bubble chart, you can hover over the circles to see what Pokémon type it corresponds to and how many Pokémon belong to that type.
 
 _(For Pokémon nerds out there, this plot only takes into account primary typing! So sorry, Flying types.)_
@@ -205,8 +293,14 @@ _(For Pokémon nerds out there, this plot only takes into account primary typing
 # 4. Other type of cool plots
 
 ## 4B. Histograms
+Let's see how is the distribution of pokémons' defense and attack.
 
-```{r}
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
 pok4b <- pokemon %>%
   plot_ly(alpha = 0.6) %>%
   add_histogram(x = ~defense,
@@ -219,9 +313,22 @@ pok4b <- pokemon %>%
                       zeroline = FALSE),
          yaxis = list(title = "Frequency",
                       zeroline = FALSE))
+```
+]]
+</details>
 
+
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
 pok4b
 ```
+]]
+</details>
+
 
 Wow! Pokemons' defense and attack points also follow a normal distribution!
 
@@ -230,16 +337,34 @@ Wow! Pokemons' defense and attack points also follow a normal distribution!
 
 ## 4C. Box plots
 
-```{r}
+This boxplot showcases on average how  strong (`base_total`) the Pokémon in each generation of games are. Hovering over each bin with your mouse will reveal summary statistics of each group.
+
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
 pok4c <- plot_ly(data = pokemon,
   y = ~base_total,
   x = ~generation,
   type = "box",
   showlegend = FALSE)
+```
+]]
+</details>
 
+
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
 pok4c
 ```
-This boxplot showcases on average how  strong (`base_total`) the Pokémon in each generation of games are. Hovering over each bin with your mouse will reveal summary statistics of each group.
+]]
+</details>
 
 ---
 
@@ -256,6 +381,8 @@ build your first plotly plot. There are two ways to do this:
 We're going to have a more in-depth look at the first option.
 
 ---
+# 5. Building your first Plotly graph
+## 5A.
 
 __Let's say that I want to have a look at the Pokémon from the first Pokémon game, released
 in 1996. My theory is that a Pokémon's hit points total is positively correlated with its defense stat, as a more protected, defensive Pokémon will last longer in battle.__
@@ -266,15 +393,35 @@ Notice that I call the variables with a `~`. This is important to plotly's synta
 
 ---
 
-```{r}
+# 5. Building your first Plotly graph
+## 5A.
+
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
 # cleaning data
 pokemon_gen13 <- filter(pokemon, generation == "1")
 
 # constructing our plotly graph
 pok5a <- plot_ly(pokemon_gen13, x = ~defense, y = ~hp, type = 'scatter')
+```
+]]
+</details>
 
+
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
 pok5a
 ```
+]]
+</details>
 
 Visually, there does seem to be a positive correlation with these two statistics.
 
@@ -284,8 +431,14 @@ While it's a nice scatterplot, this hardly takes advantage of plotly's interacti
 # 5. Building your first Plotly graph
 
 ## 5B. Leveling up your plots
+Something is about to evolve...
 
-```{r}
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
 # cleaning data
 pokemon_gen13 <- filter(pokemon, generation == "1")
 
@@ -304,9 +457,22 @@ pok5b <- plot_ly(pokemon_gen13, x = ~defense, y = ~hp,
 layout(title = "Hit points by Defense points",
   xaxis = list(title = list(text = 'Defense statistic')),
   yaxis = list(title = list(text = 'Hit points')))
+```
+]]
+</details>
 
+
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
 pok5b
 ```
+]]
+</details>
+
 I used the following functions to add more detail:
 
 - `color()` allows you to create a legend for your plot. Here, I separated the observations based on if the Pokémon is legenday (read: one of a kind) or not.
@@ -324,7 +490,12 @@ But plotly doesn't stop there. As previously shown, the package is capable of re
 
 I'll show you this by adding a **z-axis** on my previous plot. While I can define the trace type manually, plotly will also automatically assume a 3D scatterplot from my parameters.
 
-```{r}
+<details>
+  <summary>
+  Code
+  </summary>
+.details[.code120[
+```{r, eval=TRUE, message=FALSE, warning=FALSE, echo=TRUE, fig.width=5, fig.height=4}
 # cleaning data
 pokemon_gen13 <- filter(pokemon, generation == "1")
 
@@ -343,9 +514,22 @@ pok5c <- plot_ly(pokemon_gen13, x = ~defense, y = ~hp, z = ~height_m,
 layout(title = "Hit points by Defense points by Height (in meters)",
   xaxis = list(title = list(text = 'Defense statistic')),
   yaxis = list(title = list(text = 'Hit points')))
+```
 
+]]
+</details>
+
+
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
 pok5c
 ```
+]]
+</details>
 
 ---
 
@@ -374,19 +558,43 @@ Yes, it's possible! The function `ggplotly()` allows you to do this.
 
 Remember this graph from before?
 
-```{r}
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
 pok3a
 ```
+]]
+</details>
+
 
 ---
+# 6. Some extras
+
+## 6B. Transforming ggplot graphs into plotly
 
 Applying our make-over with `ggplot_ly()`:
 
 ```{r}
-pok3a %>% 
+pok3ly <- pok3a %>% 
   style(hovertext = ~name) %>% 
   ggplotly()
 ```
+
+
+<details>
+  <summary>
+  Plot
+  </summary>
+.details[.code120[
+```{r, message=FALSE, warning=FALSE, fig.width=7, fig.height=5, fig.align='center', echo=FALSE}
+pok3ly
+```
+]]
+</details>
+
 To change the looks of this graph, you would have to do some modifications on the ggplot side of things, although some alterations are possible with `style()`. It may be better to build the graph natively in `plotly()` depending on your requirements.
 
 ---
@@ -401,56 +609,7 @@ With these tips, your plots will be the very best, like no plot ever was!
 
 ---
 
-# 8. Final challenges
-
-Here are two exercises to challenge your plotly skills. 
-
-1st. Using the `pokemon` dataset from the package `Rokemon`, can you plot out the relationship of height and weight for all Fire-type Pokemon? Assign legend colors according to generation, and make sure the hover text includes the pokemon's name and their classification.
-
-Possible solution below - no cheating! ;)
-
-```{r, eval = FALSE}
-pokemon_hw <- filter(pokemon, type1 == "fire")
-
-hw_plot <- plot_ly(pokemon_hw, x = ~height_m, y = ~weight_kg,
-               type = 'scatter',
-               color = ~generation, 
-               opacity = 0.5,
-               hovertext = ~paste('</br> Name: ', name,
-                             '</br> Species: ', classfication)) %>% 
-layout(title = "Relationship between height and weight of Fire-types",
-  xaxis = list(title = list(text = 'Height (meters)')),
-  yaxis = list(title = list(text = 'Weight (kilograms)')))
-
-hw_plot
-
-```
-
----
-# 8. Final challenges
-
-2nd. We wanted to see if there was a correlation between weight and attack in ground and water type pokémons, sadly... we couldn't find any :/ The worst part is that bug pokemons made their thing and ruined our code! Now we can't show you that there is no correlation. But here you come, pokémon masteR, please find the BUGS in the following code, fix it and bring back the graph! Do you accept the challenge?
-
-```{r, eval = FALSE}
-
-challenge2 <- rokemon %>%
-  filter(type = c("ground","water")) %>%
-  plot_ly(x = ~attack, y = ~weigth_kg, splt = ~type, 
-        type == 'scatter') %>% 
-  layout(title = 'Weight  vs. Attack', 
-         xaxs = list(title = 'Attack'),
-         yaxis = list(title = 'Weight (kilograms)'),          
-         legend = list(title = list(text = 'Type')),
-         plot_bgcolor = 'white')
-
-challenge2
-
-```
-
-
----
-
-# 9. References and Sources
+# 8. References and Sources
 
 * [Interactive web-based data visualization with R, plotly, and shiny](https://plotly-r.com)
 * ['plotly' package documentation](https://cran.r-project.org/web/packages/plotly/plotly.pdf)
