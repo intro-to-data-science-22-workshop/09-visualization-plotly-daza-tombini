@@ -78,7 +78,7 @@ Let's take a closer look of our dataset.
 ```{r,}
 pok3a <- ggplot(pokemon, aes(x=attack, y=speed)) +
   geom_point(shape=1, alpha=0.5) +   
-  ggtitle("Fig. 1: Attack vs Speed ", subtitle = "Built with Ggplot") +
+  ggtitle("Fig. 3A: Attack vs Speed ", subtitle = "Built with Ggplot") +
   labs(y="Attack", 
        x = "Speed", 
   caption = "Source: Pokemon")+
@@ -95,7 +95,7 @@ This graphic looks cool! We can clearly see a positive correlation between attac
 pok3b <- ggplot(pokemon, aes(x=attack, y=speed, label= name)) +
   geom_point(shape=1, alpha=0.5) +
   geom_text(size=3, hjust=1, vjust=1) +
-  ggtitle("Fig. 1B: Attack vs Speed ", subtitle = "Built with Ggplot") +
+  ggtitle("Fig. 3B: Attack vs Speed ", subtitle = "Built with Ggplot") +
   labs(y="Attack", 
        x = "Speed", 
   caption = "Source: Pokemon")+
@@ -112,7 +112,7 @@ Graphic 3B is not clear, you can not identify the Pokémon. So... here comes plo
 pok3c <- pokemon%>%
   plot_ly(x = ~attack, y = ~speed, type = 'scatter', mode = 'markers',text=~name,
           marker=list(color="blue", size=10))%>%
-  layout(title= "Fig. 1: Attack vs Speed",
+  layout(title= "Fig. 3C: Attack vs Speed",
          xaxis = list(title = list(text = 'Speed')),
          yaxis = list(title = list(text = 'Attack')))
 
@@ -137,7 +137,7 @@ pok3d <- pok3d_df %>%
   plot_ly(x = ~attack, y = ~speed, color =~generation,
           type = 'scatter', mode = 'markers', text= ~name,
           colors = c("#D64E12", "#F9A52C", "#EFDF48", "#8BD346", "#60DBE8", "#16A4D8", "#9B5FE0")) %>%
-  layout(title= "Fig. 1: Attack vs Speed",
+  layout(title= "Fig. 3D: Attack vs Speed",
          xaxis = list(title = list(text = 'Speed')),
          yaxis = list(title = list(text = 'Attack')))
 
