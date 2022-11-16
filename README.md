@@ -17,7 +17,7 @@ The goals of this session are to (1) compare plotly's functionalities to popular
 ## Instructors
 
 - Daniel Daza ([website](https://github.com/danieldazavz/), [twitter](https://twitter.com/danieldazavz))
-- Sofia Tombini ([website](https://github.com/tofiasodd/), [twitter](https://twitter.com/KermitTheFrog))
+- Sofia Tombini ([website](https://github.com/tofiasodd/), [linkedin](https://www.linkedin.com/in/sofia-todd-tombini/))
 
 
 ## Further resources
@@ -33,6 +33,4 @@ The material in this repository is made available under the [MIT license](http:/
 
 ## Statement of contributions
 
-**Daniel and Sofia** prepared the practice material and post-processed the recording.
-
-**Daniel and Sofia** prepared the presentation slides and recording. They also provided examples to the practice material.
+**Daniel and Sofia** prepared the practice material and post-processed the recording. They both prepared the presentation slides and recording. They also both provided examples/exercises to the practice material.
