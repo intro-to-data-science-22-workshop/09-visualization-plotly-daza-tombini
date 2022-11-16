@@ -2,6 +2,7 @@
 title: "Creating interactive graphs with Plotly"
 author: "Sofia T. and Daniel D."
 institute: "Hertie School of Governance - IDS Workshop 2022"
+keep_md: TRUE
 output:
   xaringan::moon_reader:
     css: [default, metropolis, metropolis-fonts]
